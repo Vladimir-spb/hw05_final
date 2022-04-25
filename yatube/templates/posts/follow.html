@@ -1,28 +1,10 @@
 {% extends "base.html" %}
 {% load thumbnail %}
 {% block title %}Подписки{% endblock %}
-{% block header %}Посты авторов, на которых вы подписаны{% endblock %}
 {% block content %}
 
 
-
-
-{% if user.is_authenticated %} 
-  <div class="row" style="margin-left: 0px;">
-    <ul class="nav nav-tabs">
-      <li class="nav-item">
-        <a class="nav-link {% if index %}active{% endif %}" href="{% url 'posts:home' %}">
-          Все авторы
-        </a>
-        </li>
-      <li class="nav-item">
-        <a class="nav-link {% if follow %}active{% endif %}" href="{% url 'posts:follow_index' %}">
-          Избранные авторы
-        </a>
-      </li>
-    </ul>
-  </div>
-{% endif %}
+{% include 'includes/tab_follow.html' %}
 
   {% for post in page_obj %}
   <ul>

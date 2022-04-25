@@ -254,6 +254,9 @@ class FollowTests(TestCase):
         response = self.another_follower_client.get(
             reverse("posts:follow_index"))
         self.assertNotContains(response, post_create_0.text)
+        self.assertTrue(Follow.objects.filter(
+            user=FollowTests.follower,
+            author=FollowTests.following).exists())
 
     def test_unfollow(self):
         """
@@ -267,3 +270,6 @@ class FollowTests(TestCase):
             )
         )
         self.assertEqual(Follow.objects.count(), 0)
+        self.assertFalse(Follow.objects.filter(
+            user=FollowTests.follower,
+            author=FollowTests.following).exists())
